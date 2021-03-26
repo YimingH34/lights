@@ -1,11 +1,12 @@
+let Walk_button = 0
+let malfunction = 0
+let turns = 0
 input.onButtonPressed(Button.A, function () {
     Walk_button += 1
 })
 input.onButtonPressed(Button.B, function () {
     malfunction += 1
 })
-let Walk_button = 0
-let malfunction = 0
 basic.forever(function () {
     if (malfunction == 0) {
         for (let green_light = 0; green_light <= 5; green_light++) {
@@ -52,6 +53,7 @@ basic.forever(function () {
                 `)
             basic.pause(100)
         }
+        turns = 12
     } else if (malfunction == 1) {
         pins.digitalWritePin(DigitalPin.P0, 0)
         basic.pause(200)
@@ -69,7 +71,7 @@ basic.forever(function () {
     }
 })
 basic.forever(function () {
-    let green_light = 0
+    let green_light2 = 0
     if (Walk_button >= 1 && pins.digitalReadPin(DigitalPin.P0) == 1) {
         basic.showLeds(`
             # # # # #
@@ -88,15 +90,17 @@ basic.forever(function () {
             # # # # #
             `)
         basic.clearScreen()
-    } else if (Walk_button >= 1 && green_light <= 3) {
-        basic.showLeds(`
-            . . # . .
-            . # # # .
-            . # # # .
-            . . # . .
-            . # . # .
-            `)
-        basic.pause(100)
-        basic.clearScreen()
+    } else if (Walk_button >= 1 && green_light2 <= 3) {
+        if (turns == 12) {
+            basic.showLeds(`
+                . . # . .
+                . # # # .
+                . # # # .
+                . . # . .
+                . # . # .
+                `)
+            basic.pause(100)
+            basic.clearScreen()
+        }
     }
 })
