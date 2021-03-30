@@ -1,3 +1,9 @@
+/**
+ * This is where the code is running.
+ */
+/**
+ * Whenever the program is turned on, it will set one of the variable that I set up(Walk_button) to 0 and another variable (malfunction) to 0 as well.
+ */
 // When ever you press the A button, a variable that I set up will increase by 1 and it will show the led which is full.
 input.onButtonPressed(Button.A, function () {
     Walk_button += 1
@@ -9,16 +15,13 @@ input.onButtonPressed(Button.A, function () {
         # # # # #
         `)
 })
+input.onButtonPressed(Button.AB, function () {
+    control.reset()
+})
 // Whenever you press the B button, it will simply increase another variable that I set by 1.
 input.onButtonPressed(Button.B, function () {
     malfunction += 1
 })
-/**
- * Whenever the program is turned on, it will set one of the variable that I set up(Walk_button) to 0 and another variable (malfunction) to 0 as well.
- */
-/**
- * This is where the code is running.
- */
 let malfunction = 0
 let Walk_button = 0
 // This is to make the code to run forever, because it is always true therefore it will run forever.
@@ -50,13 +53,6 @@ while (true) {
             pins.digitalWritePin(DigitalPin.P0, 1)
             // This will make the light to turn on for 5sec.
             basic.pause(25000)
-            // This for-loop will make the greenlight to make a blinking effect and this will make it repeat 3 times.
-            for (let index2 = 0; index2 <= 2; index2++) {
-                pins.digitalWritePin(DigitalPin.P0, 0)
-                basic.pause(150)
-                pins.digitalWritePin(DigitalPin.P0, 1)
-                basic.pause(150)
-            }
             // Turns off the P0.
             pins.digitalWritePin(DigitalPin.P0, 0)
             for (let turns = 0; turns <= 8; turns++) {
@@ -107,10 +103,10 @@ while (true) {
         pins.digitalWritePin(DigitalPin.P2, 1)
         basic.pause(7000)
         // After the icon shows up for a little bit, it will show a count down.
-        for (let index3 = 0; index3 <= 17; index3++) {
-            basic.showNumber(18 - index3)
+        for (let index3 = 0; index3 <= 9; index3++) {
+            basic.showNumber(10 - index3)
         }
-        for (let index = 0; index < 3; index++) {
+        for (let index = 0; index <= 2; index++) {
             pins.digitalWritePin(DigitalPin.P2, 0)
             basic.pause(100)
             pins.digitalWritePin(DigitalPin.P2, 1)
@@ -131,12 +127,6 @@ while (true) {
         pins.digitalWritePin(DigitalPin.P1, 0)
         pins.digitalWritePin(DigitalPin.P0, 1)
         basic.pause(25000)
-        for (let index = 0; index < 3; index++) {
-            pins.digitalWritePin(DigitalPin.P0, 0)
-            basic.pause(150)
-            pins.digitalWritePin(DigitalPin.P0, 1)
-            basic.pause(150)
-        }
         pins.digitalWritePin(DigitalPin.P0, 0)
         for (let turns2 = 0; turns2 <= 8; turns2++) {
             basic.showLeds(`
@@ -162,3 +152,8 @@ while (true) {
         break;
     }
 }
+control.inBackground(function () {
+    if (malfunction != 0 && Walk_button != 0) {
+        malfunction = 0
+    }
+})

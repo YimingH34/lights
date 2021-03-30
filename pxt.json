@@ -4,7 +4,8 @@
     "dependencies": {
         "core": "*",
         "radio": "*",
-        "microphone": "*"
+        "microphone": "*",
+        "Two-Coin tossing game": "github:capyyimg/two-coin-tossing-game#master"
     },
     "files": [
         "main.blocks",
